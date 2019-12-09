@@ -1,0 +1,24 @@
+We need a simple api for restaurants with these requirements:-
+  1-  Authentication and authorization (a System admin and normal users).
+  2-  System admin can add , update and delete restaurants.
+  3-  Find nearest restaurants from a given location (point).
+  4-  Typeahead search on restaurants names.
+  5-  Statistics endpoint to group restaurants and their count by city .
+
+Models :
+       User:
+           name
+           email
+           password
+         role
+
+       City
+              name
+ 
+       Restaurant 
+               city
+               image
+               name
+               email
+               location
+              
