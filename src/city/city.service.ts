@@ -8,10 +8,6 @@ import { CityDto } from './dto/city.dto';
 export class CityService{
 
     constructor(@InjectModel('City') private cityModel: Model<City>){}
-    getCity(){
-        return "Cairo Mall";
-    }
-    
     
     async findAll(): Promise<City[]>{
         return this.cityModel.find();
