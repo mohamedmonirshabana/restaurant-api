@@ -32,8 +32,8 @@ export class RestaurantController{
     }
 
     @Get()
-    getRestaurantByLocation(@Body('lat')lat: number,@Body('long')long: number){
-        return this.restaurantDB.searchbyNearLocation(lat,long);
+    async getRestaurantByLocation(@Body('lat')lat: number,@Body('long')long: number){
+        return await this.restaurantDB.searchbyNearLocation(lat,long);
     }
     
 

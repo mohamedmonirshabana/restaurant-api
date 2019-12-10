@@ -53,7 +53,7 @@ export class RestaurantService{
 
     }
     async searchbyNearLocation(lat: number, long: number): Promise<Restaurant[]>{
-        return this.restaurantModel.find({
+        return await this.restaurantModel.find({
             location:{
                 $near :{
                     $geometry: { type: "Point",  coordinates: [ +long, +lat ] },
