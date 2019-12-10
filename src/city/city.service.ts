@@ -14,7 +14,7 @@ export class CityService{
     }
 
     async addNewCity (city : CityDto){
-        const newCity = this.cityModel(city);
+        const newCity = new this.cityModel(city);
 
         await newCity.save();
 
