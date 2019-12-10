@@ -24,9 +24,9 @@ export class CityController{
         return this.cityDB.addNewCity(citydto);
     }
 
-    @Put(':id')
-    async updateCity(@Param('id')id: string, @Body() cityData: CityDto): Promise<City>{
-        return this.cityDB.updateCity(id, cityData);
-    }
+    // @Put(':id')
+    // async updateCity(@Param('id')id: string, @Body() cityData: CityDto): Promise<City>{
+    //     return this.cityDB.updateCity(id, cityData);
+    // }
     
 }
