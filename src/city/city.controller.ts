@@ -1,10 +1,28 @@
-import { Controller, Get, Param, Post, Body, Put } from "@nestjs/common";
+import { 
+    BadRequestException,
+    Body,
+    Controller,
+    Delete,
+    Get,
+    HttpException,
+    NotFoundException,
+    Param,
+    Post,
+    Put,
+    Req,
+    Res,
+    UseFilters, UseGuards
+} from "@nestjs/common";
 
 import { City } from "./model/city";
 import { CityDto } from "./dto/city.dto";
 import { CityService } from "./city.service";
+import { AuthenticationGuard } from '../guards/authentication.guard';
+import { AdminGuard } from '../guards/admin.guard';
+import { UserGuard } from '../guards/user.guard';
 
 @Controller("cities")
+@UseGuards(AuthenticationGuard)
 export class CityController{
     constructor(private readonly cityDB: CityService){}
 
@@ -20,6 +38,7 @@ export class CityController{
     }
 
     @Post()
+    @UseGuards(AdminGuard)
     async addCity(@Body() citydto : CityDto): Promise<City>{
         return this.cityDB.addNewCity(citydto);
     }
