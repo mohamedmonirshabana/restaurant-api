@@ -14,16 +14,20 @@ export class CityService{
     }
 
     async addNewCity (city : CityDto){
-        const newCity = new this.cityModel(city);
+        const newCity =  new this.cityModel(city);
+
+        console.log(newCity);
 
         await newCity.save();
 
-        return newCity.toObject({versionKey: false});
+        return newCity;
+        //return newCity.toObject({versionKey: false});
 
     }
 
-    async updateCity(cityId: string, cityData: City){
-        return this.cityModel.findOneAndUpdate({_id: cityId},cityData, {new:true});
+    async updateCity(cityId: string, cityData: string){
+        
+        return await this.cityModel.findOneAndUpdate({_id: cityId},{name: cityData}, {new:true});
     }
 
     async GetOneCity(cityId: string): Promise<City>{

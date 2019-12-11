@@ -11,7 +11,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { useContainer } from "class-validator";
 
 @Controller('restaurants')
-
+@UseGuards(AuthenticationGuard)
 export class RestaurantController{
     constructor( private readonly restaurantDB: RestaurantService ){}
 

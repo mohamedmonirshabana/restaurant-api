@@ -11,7 +11,7 @@ import {
     Put,
     Req,
     Res,
-    UseFilters, UseGuards
+    UseFilters, UseGuards, Bind
 } from "@nestjs/common";
 
 import { City } from "./model/city";
@@ -29,7 +29,7 @@ export class CityController{
     @Get()
     async findAllCity(){
         
-        return this.cityDB.findAll();
+        return await this.cityDB.findAll();
     }
     
     @Get(':id')
@@ -37,15 +37,19 @@ export class CityController{
         return this.cityDB.GetOneCity(id);
     }
 
+    //@UseGuards(AdminGuard)
     @Post()
     @UseGuards(AdminGuard)
-    async addCity(@Body() citydto : CityDto): Promise<City>{
-        return this.cityDB.addNewCity(citydto);
+    async addCity(@Body() cityDto: CityDto  ){
+        //console.log("body=>", cityDto);
+        //console.log("DTO Data is :",cityDto);
+        return this.cityDB.addNewCity(cityDto);
     }
 
-    // @Put(':id')
-    // async updateCity(@Param('id')id: string, @Body() cityData: CityDto): Promise<City>{
-    //     return this.cityDB.updateCity(id, cityData);
-    // }
+    @Put(':id')
+    @UseGuards(AdminGuard)
+    async updateCity(@Param('id')id: string, @Body('name') cityData: string){
+        return await this.cityDB.updateCity(id, cityData);
+    }
     
 }

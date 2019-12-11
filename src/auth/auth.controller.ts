@@ -7,7 +7,7 @@ import {JWT_SECRET} from "../constants";
 import { User } from '../user/model/user';
 import { CreatUserDto } from "src/user/dto/createuser.dto";
 
-@Controller("auth")
+@Controller("auth") 
 export class AuthController{
 
     constructor(@InjectModel("User") private userModel: Model<User>){
