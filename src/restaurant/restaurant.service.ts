@@ -53,6 +53,16 @@ export class RestaurantService{
 
     }
     async searchbyNearLocation(lat: number, long: number): Promise<Restaurant[]>{
+       
+    //    console.log({
+    //     location:{
+    //         $nearSphere:{
+    //             $geometry: { type: "Point",  coordinates: [ +long, +lat ] },
+    //             $maxDistance: 500000000000000000000000
+    //         }
+    //     }
+    //    })
+       
         return await this.restaurantModel.find({
             location:{
                 $nearSphere:{

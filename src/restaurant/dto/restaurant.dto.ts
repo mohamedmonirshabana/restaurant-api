@@ -1,4 +1,5 @@
 import{ IsNotEmpty, IsString, IsEmail, IsMongoId, IsNumber } from 'class-validator';
+import {Type} from "class-transformer";
 
 export class RestaurantDto {
     @IsMongoId()
@@ -19,9 +20,11 @@ export class RestaurantDto {
     email: string;
 
     @IsNumber()
+    @Type(()=> Number)
     lat: number;
 
     @IsNumber()
+    @Type(()=> Number)
     long: number;
 
 

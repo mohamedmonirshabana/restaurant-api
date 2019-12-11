@@ -6,6 +6,7 @@ import * as mongoose from 'mongoose';
 import { ValidationError, ValidationPipe } from "@nestjs/common";
 import { ValidationFilter } from './filters/validation.filter';
 import { ValidationException } from './filters/validation.exception';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 mongoose.set('useFindAndModify', false);
 
@@ -28,6 +29,14 @@ async function bootstrap() {
       return new ValidationException(message);
     }
   }));
+
+  const options = new DocumentBuilder()
+  .setTitle('Restaurant API')
+  .setDescription('The Restaurant API description')
+  .setVersion('1.0')
+  .build();
+const document = SwaggerModule.createDocument(app, options);
+SwaggerModule.setup('api/docs', app, document);
 
   await app.listen(3000);
 }
