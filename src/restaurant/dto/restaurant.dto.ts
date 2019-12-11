@@ -7,8 +7,8 @@ export class RestaurantDto {
     @IsNotEmpty()
     city: string;
 
-    @IsNotEmpty()
-    @IsString()
+    //@IsNotEmpty()
+    //@IsString()
     image: string
 
     @IsNotEmpty()

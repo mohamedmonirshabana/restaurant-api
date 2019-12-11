@@ -15,7 +15,7 @@ import { CityController } from './city/city.controller';
     CityModule,
     RestaurantModule,
     AuthModule,
-    MongooseModule.forRoot(MONGO_CONNECTION)
+    MongooseModule.forRoot(MONGO_CONNECTION,{ useNewUrlParser: true, useUnifiedTopology: true })
   ],
   controllers: [AppController],
   providers: [AppService],

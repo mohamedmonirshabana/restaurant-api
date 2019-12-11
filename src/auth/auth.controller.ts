@@ -4,15 +4,16 @@ import { Model } from 'mongoose';
 import * as password from 'password-hash-and-salt';
 import * as jwt from 'jsonwebtoken';
 import {JWT_SECRET} from "../constants";
+import { User } from '../user/model/user';
+import { CreatUserDto } from "src/user/dto/createuser.dto";
 
-
-@Controller("login")
+@Controller("auth")
 export class AuthController{
 
-    constructor(@InjectModel("User") private userModel: Model){
+    constructor(@InjectModel("User") private userModel: Model<User>){
 
     }
-    @Post()
+    @Post("login")
     async login(@Body("email") email:string, 
     @Body("password") plaintextPassword:string){
         const user = await this.userModel.findOne({email});
@@ -34,5 +35,19 @@ export class AuthController{
                 }
             );
         });
+    }
+
+    @Post('register')
+    async Register(@Body() creatUserDto: CreatUserDto){
+        console.log(creatUserDto)
+
+
+        password(creatUserDto.passwordHash).hash( async (err, hash)=>{
+            creatUserDto.passwordHash = hash;
+            console.log(creatUserDto);
+            const user = await this.userModel.create(creatUserDto);
+        });
+
+        
     }
 }
